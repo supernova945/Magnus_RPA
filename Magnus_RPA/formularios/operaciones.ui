@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>menu</class>
+ <widget class="QMainWindow" name="menu">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>72</family>
+   </font>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::FocusPolicy::NoFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Magnus</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../recursos/magnus.ico</normaloff>../recursos/magnus.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+/* ═══════════════════════════════════════════════
+   GLASSMORPHISM DARK — OPERACIONES
+   Base: fondo profundo con capa de &quot;vidrio&quot; encima
+   ═══════════════════════════════════════════════ */
+
+QMainWindow, QWidget#centralwidget {
+    background-color: #060B14;
+    /* Puntos de luz de fondo simulando profundidad */
+    background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(24,119,242,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 75%, rgba(7,94,84,0.07) 0%, transparent 55%);
+}
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_main">
+    <property name="spacing">
+     <number>15</number>
+    </property>
+    <property name="leftMargin">
+     <number>20</number>
+    </property>
+    <property name="topMargin">
+     <number>20</number>
+    </property>
+    <property name="rightMargin">
+     <number>20</number>
+    </property>
+    <property name="bottomMargin">
+     <number>20</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="top_accent">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>3</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>3</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+QFrame#top_accent {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+        stop:0   #1877F2,
+        stop:0.4 #4FA3F7,
+        stop:0.6 #38D9A9,
+        stop:1   #075E54);
+    border: none;
+}
+       </string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <family>72</family>
+        <pointsize>12</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+color: #1877F2;
+background: transparent;
+border: none;
+       </string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;🕹️ /DBM/CASHDESK&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lbl_dropzone">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>72</family>
+        <pointsize>-1</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+QLabel {
+    border: 2px dashed #232B3E;
+    border-radius: 10px;
+    background-color: #161B27;
+    color: #3A5080;
+    font-size: 12px;
+}
+QLabel:hover {
+    background-color: #1A2236;
+    border: 2px dashed #1877F2;
+    color: #A8B8D8;
+}
+       </string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:28pt;&quot;&gt;📁&lt;/span&gt;&lt;br/&gt;&lt;span style=&quot; font-size:9pt; color:#3A5080;&quot;&gt;¡ Arrastra y suelta tu &lt;br/&gt;archivo aquí ! &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_middle">
+      <property name="spacing">
+       <number>15</number>
+      </property>
+      <item>
+       <widget class="QFrame" name="frame">
+        <property name="styleSheet">
+         <string notr="true">
+QFrame#frame {
+    background-color: #161B27;
+    border-radius: 10px;
+    border: 1.5px solid #232B3E;
+}
+         </string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_frame">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+         <property name="leftMargin">
+          <number>14</number>
+         </property>
+         <property name="topMargin">
+          <number>10</number>
+         </property>
+         <property name="rightMargin">
+          <number>10</number>
+         </property>
+         <property name="bottomMargin">
+          <number>10</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <family>72</family>
+             <pointsize>8</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+color: #3A5080;
+font-size: 7.5pt;
+font-weight: 700;
+letter-spacing: 1px;
+background: transparent;
+border: none;
+            </string>
+           </property>
+           <property name="text">
+            <string>RUTA</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="txt_ruta_archivo">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>72</family>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QLineEdit {
+    background-color: #0D1117;
+    border: 1.5px solid #232B3E;
+    border-radius: 8px;
+    color: #A8B8D8;
+    font-family: &quot;72&quot;;
+    padding: 4px 10px;
+}
+QLineEdit:disabled {
+    color: #3A5080;
+    border-color: #1E2840;
+}
+            </string>
+           </property>
+           <property name="placeholderText">
+            <string>Ruta del archivo...</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_select_excel">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>45</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>72</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QPushButton#btn_select_excel {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+        stop:0 #1877F2, stop:1 #3B8FF5);
+    color: white;
+    border-radius: 8px;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    border: none;
+    padding: 6px 12px;
+}
+QPushButton#btn_select_excel:hover {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+        stop:0 #145DB2, stop:1 #1877F2);
+}
+QPushButton#btn_select_excel:pressed {
+    background-color: #0F4A99;
+}
+            </string>
+           </property>
+           <property name="text">
+            <string>Explorar 📂</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="styleSheet">
+         <string notr="true">
+QGroupBox#groupBox {
+    background-color: #161B27;
+    border-radius: 10px;
+    border: 1.5px solid #232B3E;
+}
+         </string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_gb">
+         <property name="spacing">
+          <number>8</number>
+         </property>
+         <property name="leftMargin">
+          <number>14</number>
+         </property>
+         <property name="topMargin">
+          <number>12</number>
+         </property>
+         <property name="rightMargin">
+          <number>14</number>
+         </property>
+         <property name="bottomMargin">
+          <number>12</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="chk_mod_silencioso">
+           <property name="styleSheet">
+            <string notr="true">
+QCheckBox#chk_mod_silencioso {
+    color: #A8B8D8;
+    background-color: transparent;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+}
+QCheckBox#chk_mod_silencioso::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border: 1.5px solid #1877F2;
+    background-color: #0D1117;
+}
+QCheckBox#chk_mod_silencioso::indicator:hover {
+    border: 1.5px solid #4FA3F7;
+    background-color: #1A2236;
+}
+QCheckBox#chk_mod_silencioso::indicator:checked {
+    background-color: #1877F2;
+    border: 1.5px solid #145DB2;
+}
+QCheckBox#chk_mod_silencioso::indicator:pressed {
+    background-color: #145DB2;
+}
+            </string>
+           </property>
+           <property name="text">
+            <string>Modo Silencioso</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="chk_reg_detallado">
+           <property name="styleSheet">
+            <string notr="true">
+QCheckBox#chk_reg_detallado {
+    color: #A8B8D8;
+    background-color: transparent;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+}
+QCheckBox#chk_reg_detallado::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border: 1.5px solid #1877F2;
+    background-color: #0D1117;
+}
+QCheckBox#chk_reg_detallado::indicator:hover {
+    border: 1.5px solid #4FA3F7;
+    background-color: #1A2236;
+}
+QCheckBox#chk_reg_detallado::indicator:checked {
+    background-color: #1877F2;
+    border: 1.5px solid #145DB2;
+}
+QCheckBox#chk_reg_detallado::indicator:pressed {
+    background-color: #145DB2;
+}
+            </string>
+           </property>
+           <property name="text">
+            <string>Registro Detallado</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="tbl_archivo">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+QTableWidget#tbl_archivo {
+    background-color: #161B27;
+    color: #A8B8D8;
+    font-family: &quot;72&quot;;
+    font-size: 13px;
+    border: 1.5px solid #232B3E;
+    border-radius: 10px;
+    padding: 4px;
+    gridline-color: #1E2840;
+    outline: none;
+}
+QTableWidget#tbl_archivo::item:selected {
+    background-color: #1877F2;
+    color: #FFFFFF;
+}
+QHeaderView::section {
+    background-color: #0D1117;
+    color: #1877F2;
+    font-family: &quot;72&quot;;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-bottom: 2px solid #1877F2;
+    padding: 6px;
+}
+QTableCornerButton::section {
+    background-color: #0D1117;
+    border: none;
+    border-bottom: 2px solid #1877F2;
+}
+QHeaderView::section:vertical {
+    border-bottom: none;
+    border-right: 2px solid #1877F2;
+}
+QScrollBar:vertical {
+    background: #0D1117;
+    width: 6px;
+    border-radius: 3px;
+}
+QScrollBar::handle:vertical {
+    background: #232B3E;
+    border-radius: 3px;
+    min-height: 20px;
+}
+QScrollBar::handle:vertical:hover { background: #1877F2; }
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical { height: 0px; }
+QScrollBar:horizontal {
+    background: #0D1117;
+    height: 6px;
+    border-radius: 3px;
+}
+QScrollBar::handle:horizontal {
+    background: #232B3E;
+    border-radius: 3px;
+    min-width: 20px;
+}
+QScrollBar::handle:horizontal:hover { background: #1877F2; }
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal { width: 0px; }
+       </string>
+      </property>
+      <column>
+       <property name="text">
+        <string>Sociedad</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cliente</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>No Doc</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Clase</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Banco</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Fecha</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Resultado</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_pagination">
+      <property name="spacing">
+       <number>8</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="btn_anterior">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>36</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>72</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QPushButton#btn_anterior {
+    background-color: transparent;
+    color: #1877F2;
+    border: 1.5px solid #232B3E;
+    border-radius: 8px;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    padding: 4px 12px;
+}
+QPushButton#btn_anterior:hover {
+    background-color: #1A2236;
+    border-color: #1877F2;
+    color: #4FA3F7;
+}
+QPushButton#btn_anterior:pressed {
+    background-color: #172035;
+}
+QPushButton#btn_anterior:disabled {
+    color: #2A3A5A;
+    border-color: #1A2236;
+}
+         </string>
+        </property>
+        <property name="text">
+         <string>⬅️ Anterior</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_siguiente">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>36</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>72</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QPushButton#btn_siguiente {
+    background-color: transparent;
+    color: #1877F2;
+    border: 1.5px solid #232B3E;
+    border-radius: 8px;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    padding: 4px 12px;
+}
+QPushButton#btn_siguiente:hover {
+    background-color: #1A2236;
+    border-color: #1877F2;
+    color: #4FA3F7;
+}
+QPushButton#btn_siguiente:pressed {
+    background-color: #172035;
+}
+QPushButton#btn_siguiente:disabled {
+    color: #2A3A5A;
+    border-color: #1A2236;
+}
+         </string>
+        </property>
+        <property name="text">
+         <string>Siguiente ➡️</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lbl_paginacion">
+        <property name="font">
+         <font>
+          <family>72</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QLabel#lbl_paginacion {
+    color: #3A5080;
+    background: transparent;
+    border: none;
+    font-family: &quot;72&quot;;
+    font-size: 9pt;
+    padding: 0px 6px;
+}
+         </string>
+        </property>
+        <property name="text">
+         <string>Mostrando 0 - 0 de 0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_pagination">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="lbl_filas_por_pagina">
+        <property name="font">
+         <font>
+          <family>72</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QLabel#lbl_filas_por_pagina {
+    color: #3A5080;
+    background: transparent;
+    border: none;
+    font-family: &quot;72&quot;;
+    font-size: 9pt;
+}
+         </string>
+        </property>
+        <property name="text">
+         <string>Filas por página:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cmb_filas_por_pagina">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>36</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>72</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QComboBox#cmb_filas_por_pagina {
+    background-color: #161B27;
+    color: #A8B8D8;
+    border: 1.5px solid #232B3E;
+    border-radius: 8px;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    padding: 4px 10px;
+}
+QComboBox#cmb_filas_por_pagina:hover {
+    border-color: #1877F2;
+}
+QComboBox#cmb_filas_por_pagina::drop-down {
+    border: none;
+    width: 20px;
+}
+QComboBox#cmb_filas_por_pagina::down-arrow {
+    image: none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid #1877F2;
+    width: 0px;
+    height: 0px;
+}
+QComboBox#cmb_filas_por_pagina QAbstractItemView {
+    background-color: #161B27;
+    color: #A8B8D8;
+    border: 1.5px solid #1877F2;
+    border-radius: 6px;
+    selection-background-color: #1877F2;
+    selection-color: #FFFFFF;
+}
+         </string>
+        </property>
+        <item>
+         <property name="text">
+          <string>50</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>100</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>500</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_bottom">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_limpiar">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>45</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>72</family>
+          <pointsize>10</pointsize>
+          <fontweight>DemiBold</fontweight>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QPushButton#btn_limpiar {
+    background-color: transparent;
+    color: #1877F2;
+    border: 2px solid #1877F2;
+    border-radius: 8px;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    font-weight: 600;
+    padding: 6px 12px;
+}
+QPushButton#btn_limpiar:hover {
+    background-color: #1A2236;
+    color: #4FA3F7;
+    border-color: #4FA3F7;
+}
+QPushButton#btn_limpiar:pressed {
+    background-color: #172035;
+    color: #1877F2;
+}
+         </string>
+        </property>
+        <property name="text">
+         <string>Limpiar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_iniciar">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>45</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>72</family>
+          <pointsize>10</pointsize>
+          <fontweight>DemiBold</fontweight>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QPushButton#btn_iniciar {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+        stop:0 #1877F2, stop:1 #3B8FF5);
+    color: white;
+    border-radius: 8px;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    font-weight: 600;
+    border: none;
+    padding: 6px 12px;
+}
+QPushButton#btn_iniciar:hover {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+        stop:0 #145DB2, stop:1 #1877F2);
+}
+QPushButton#btn_iniciar:pressed {
+    background-color: #0F4A99;
+}
+         </string>
+        </property>
+        <property name="text">
+         <string>Iniciar </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_detener">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>45</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>72</family>
+          <pointsize>10</pointsize>
+          <fontweight>DemiBold</fontweight>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QPushButton#btn_detener {
+    background-color: transparent;
+    color: #E05070;
+    border: 2px solid #7A4A55;
+    border-radius: 8px;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    font-weight: 600;
+    padding: 6px 12px;
+}
+QPushButton#btn_detener:hover {
+    background-color: #2A1520;
+    color: #FF5577;
+    border-color: #E05070;
+}
+QPushButton#btn_detener:pressed {
+    background-color: #200F18;
+    color: #FF3355;
+}
+         </string>
+        </property>
+        <property name="text">
+         <string>Detener</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../recursos/recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>

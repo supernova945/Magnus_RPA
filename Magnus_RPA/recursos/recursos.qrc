@@ -1,0 +1,13 @@
+<RCC>
+  <qresource prefix="icons/">
+    <file>icons/usuario.png</file>
+    <file>icons/buscar.png</file>
+    <file>icons/calavera.png</file>
+    <file>icons/campana.png</file>
+    <file>icons/cerrar.png</file>
+    <file>icons/craneo.png</file>
+    <file>icons/cubo.png</file>
+    <file>icons/maximizar.png</file>
+    <file>icons/minimizar.png</file>
+  </qresource>
+</RCC>

@@ -1,0 +1,27 @@
+# --- Basura de Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Entornos Virtuales ---
+venv/
+env/
+.env
+
+# --- Compilación (No subir el EXE ni temporales) ---
+build/
+dist/
+*.spec
+
+# --- Logs y Datos (SEGURIDAD) ---
+logs/
+*.log
+*.xlsx
+*.xls
+config.json
+*.pyd
+*.c
+
+# --- IDEs ---
+.vscode/
+.idea/

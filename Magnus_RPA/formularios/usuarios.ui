@@ -1,0 +1,1017 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>credenciales</class>
+ <widget class="QMainWindow" name="credenciales">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>72</family>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Credenciales</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../recursos/magnus.ico</normaloff>../recursos/magnus.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+/* ═══════════════════════════════════════════════
+   GLASSMORPHISM DARK — CREDENCIALES
+   Base: fondo profundo con capa de &quot;vidrio&quot; encima
+   ═══════════════════════════════════════════════ */
+
+QMainWindow, QWidget#centralwidget {
+    background-color: #060B14;
+    background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(24,119,242,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 75%, rgba(7,94,84,0.07) 0%, transparent 55%);
+}
+
+QScrollBar:vertical { background:#0D1117; width:6px; border-radius:3px; }
+QScrollBar::handle:vertical { background:#232B3E; border-radius:3px; min-height:20px; }
+QScrollBar::handle:vertical:hover { background:#1877F2; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height:0px; }
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_main">
+    <property name="spacing">
+     <number>15</number>
+    </property>
+    <property name="leftMargin">
+     <number>20</number>
+    </property>
+    <property name="topMargin">
+     <number>20</number>
+    </property>
+    <property name="rightMargin">
+     <number>20</number>
+    </property>
+    <property name="bottomMargin">
+     <number>20</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="top_accent">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>3</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>3</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+QFrame#top_accent {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+        stop:0   #1877F2,
+        stop:0.4 #4FA3F7,
+        stop:0.6 #38D9A9,
+        stop:1   #075E54);
+    border: none;
+}
+       </string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <family>72</family>
+        <pointsize>12</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+color: #1877F2;
+background: transparent;
+border: none;
+       </string>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;🔐 GESTIÓN DE USUARIOS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="hl_nuevo_perfil">
+      <item>
+       <spacer name="sp_header">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_nuevo_perfil">
+        <property name="minimumSize">
+         <size>
+          <width>130</width>
+          <height>36</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>130</width>
+          <height>36</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>72</family>
+          <pointsize>10</pointsize>
+          <fontweight>DemiBold</fontweight>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QPushButton#btn_nuevo_perfil {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+        stop:0 #1877F2, stop:1 #3B8FF5);
+    color: white;
+    border-radius: 8px;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    font-weight: 600;
+    border: none;
+    padding: 6px 12px;
+}
+QPushButton#btn_nuevo_perfil:hover {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+        stop:0 #145DB2, stop:1 #1877F2);
+}
+QPushButton#btn_nuevo_perfil:pressed { background-color: #0F4A99; }
+         </string>
+        </property>
+        <property name="text">
+         <string>+ Nuevo perfil</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="hl_body">
+      <property name="spacing">
+       <number>15</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QFrame" name="login_card">
+        <property name="minimumSize">
+         <size>
+          <width>380</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>430</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QFrame#login_card {
+    background-color: #161B27;
+    border: 1.5px solid #232B3E;
+    border-radius: 10px;
+}
+QLabel { background: transparent; border: none; }
+         </string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_card">
+         <property name="spacing">
+          <number>12</number>
+         </property>
+         <property name="leftMargin">
+          <number>20</number>
+         </property>
+         <property name="topMargin">
+          <number>20</number>
+         </property>
+         <property name="rightMargin">
+          <number>20</number>
+         </property>
+         <property name="bottomMargin">
+          <number>20</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="lbl_form_title">
+           <property name="font">
+            <font>
+             <family>72</family>
+             <pointsize>11</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: #A8B8D8; background: transparent; border: none;</string>
+           </property>
+           <property name="text">
+            <string>Detalles del Perfil</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="vl_f_alias">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lbl_f_alias">
+             <property name="styleSheet">
+              <string notr="true">
+color: #3A5080;
+font-family: &quot;72&quot;;
+font-size: 7.5pt;
+font-weight: 700;
+letter-spacing: 1px;
+background: transparent;
+border: none;
+              </string>
+             </property>
+             <property name="text">
+              <string>NOMBRE DEL PERFIL</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_alias">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
+QFrame#frame_alias {
+    background-color: #0D1117;
+    border-radius: 8px;
+    border: 1.5px solid #232B3E;
+}
+QFrame#frame_alias:focus-within {
+    border-color: #1877F2;
+}
+              </string>
+             </property>
+             <layout class="QHBoxLayout" name="hl_alias">
+              <property name="spacing">
+               <number>8</number>
+              </property>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="lbl_alias_icon">
+                <property name="styleSheet">
+                 <string notr="true">color: #1877F2; font-size: 12pt; background: transparent; border: none;</string>
+                </property>
+                <property name="text">
+                 <string>🏷</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="txt_usuario">
+                <property name="font">
+                 <font>
+                  <family>72</family>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">
+QLineEdit {
+    background: transparent;
+    border: none;
+    color: #A8B8D8;
+    font-family: &quot;72&quot;;
+    font-size: 9pt;
+    padding: 2px;
+}
+                 </string>
+                </property>
+                <property name="placeholderText">
+                 <string>Nombre del perfil</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="vl_f_user">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lbl_user">
+             <property name="styleSheet">
+              <string notr="true">
+color: #3A5080;
+font-family: &quot;72&quot;;
+font-size: 7.5pt;
+font-weight: 700;
+letter-spacing: 1px;
+background: transparent;
+border: none;
+              </string>
+             </property>
+             <property name="text">
+              <string>USUARIO SAP</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_user">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
+QFrame#frame_user {
+    background-color: #0D1117;
+    border-radius: 8px;
+    border: 1.5px solid #232B3E;
+}
+              </string>
+             </property>
+             <layout class="QHBoxLayout" name="hl_user">
+              <property name="spacing">
+               <number>8</number>
+              </property>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="lbl_user_icon">
+                <property name="styleSheet">
+                 <string notr="true">color: #1877F2; font-size: 12pt; background: transparent; border: none;</string>
+                </property>
+                <property name="text">
+                 <string>👤</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="txt_clave">
+                <property name="font">
+                 <font>
+                  <family>72</family>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">
+QLineEdit {
+    background: transparent;
+    border: none;
+    color: #A8B8D8;
+    font-family: &quot;72&quot;;
+    font-size: 9pt;
+    padding: 2px;
+}
+                 </string>
+                </property>
+                <property name="placeholderText">
+                 <string>Usuario SAP</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="vl_f_pass">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lbl_f_pass">
+             <property name="styleSheet">
+              <string notr="true">
+color: #3A5080;
+font-family: &quot;72&quot;;
+font-size: 7.5pt;
+font-weight: 700;
+letter-spacing: 1px;
+background: transparent;
+border: none;
+              </string>
+             </property>
+             <property name="text">
+              <string>CLAVE SAP</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_pass">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
+QFrame#frame_pass {
+    background-color: #0D1117;
+    border-radius: 8px;
+    border: 1.5px solid #232B3E;
+}
+              </string>
+             </property>
+             <layout class="QHBoxLayout" name="hl_pass">
+              <property name="spacing">
+               <number>8</number>
+              </property>
+              <property name="leftMargin">
+               <number>10</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>10</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="lbl_pass_icon">
+                <property name="styleSheet">
+                 <string notr="true">color: #1877F2; font-size: 12pt; background: transparent; border: none;</string>
+                </property>
+                <property name="text">
+                 <string>🔑</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="txt_clave_sap">
+                <property name="font">
+                 <font>
+                  <family>72</family>
+                  <pointsize>9</pointsize>
+                 </font>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">
+QLineEdit {
+    background: transparent;
+    border: none;
+    color: #A8B8D8;
+    font-family: &quot;72&quot;;
+    font-size: 9pt;
+    padding: 2px;
+}
+                 </string>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::EchoMode::Password</enum>
+                </property>
+                <property name="placeholderText">
+                 <string>Clave SAP</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QFrame" name="separator_entorno">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>1</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>1</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">
+QFrame#separator_entorno {
+    background-color: #232B3E;
+    border: none;
+}
+            </string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lbl_entorno_title">
+           <property name="styleSheet">
+            <string notr="true">
+color: #3A5080;
+font-family: &quot;72&quot;;
+font-size: 7.5pt;
+font-weight: 700;
+letter-spacing: 1px;
+background: transparent;
+border: none;
+            </string>
+           </property>
+           <property name="text">
+            <string>CONFIGURACIÓN DE ENTORNO</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="vl_entorno">
+           <property name="spacing">
+            <number>8</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout" name="hl_entorno_radios">
+             <property name="spacing">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QRadioButton" name="radio_prd">
+               <property name="styleSheet">
+                <string notr="true">
+QRadioButton {
+    color: #A8B8D8;
+    background: transparent;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    border: none;
+    spacing: 6px;
+}
+QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border: 1.5px solid #1877F2;
+    background-color: #0D1117;
+}
+QRadioButton::indicator:hover {
+    border: 1.5px solid #4FA3F7;
+    background-color: #1A2236;
+}
+QRadioButton::indicator:checked {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+        stop:0 #1877F2, stop:1 #0E5DA9);
+    border-color: #1877F2;
+}
+                </string>
+               </property>
+               <property name="text">
+                <string>Productivo (PR)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="radio_qas">
+               <property name="styleSheet">
+                <string notr="true">
+QRadioButton {
+    color: #A8B8D8;
+    background: transparent;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    border: none;
+    spacing: 6px;
+}
+QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    border: 1.5px solid #1877F2;
+    background-color: #0D1117;
+}
+QRadioButton::indicator:hover {
+    border: 1.5px solid #4FA3F7;
+    background-color: #1A2236;
+}
+QRadioButton::indicator:checked {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
+        stop:0 #1877F2, stop:1 #0E5DA9);
+    border-color: #1877F2;
+}
+                </string>
+               </property>
+               <property name="text">
+                <string>Pruebas (QA)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="sp_radios">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="chx_activo">
+             <property name="styleSheet">
+              <string notr="true">
+QCheckBox {
+    color: #A8B8D8;
+    background: transparent;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    border: none;
+    spacing: 6px;
+}
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1.5px solid #1877F2;
+    background-color: #0D1117;
+}
+QCheckBox::indicator:hover {
+    border: 1.5px solid #4FA3F7;
+    background-color: #1A2236;
+}
+QCheckBox::indicator:checked {
+    background-color: #1877F2;
+    border-color: #145DB2;
+}
+QCheckBox::indicator:pressed {
+    background-color: #145DB2;
+}
+              </string>
+             </property>
+             <property name="text">
+              <string>Usar para ejecución</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="sp_middle">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="hl_buttons">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="btn_guardar">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>72</family>
+               <pointsize>10</pointsize>
+               <fontweight>DemiBold</fontweight>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
+QPushButton#btn_guardar {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+        stop:0 #1877F2, stop:1 #3B8FF5);
+    color: white;
+    border-radius: 8px;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    font-weight: 600;
+    border: none;
+    padding: 6px 12px;
+}
+QPushButton#btn_guardar:hover {
+    background: qlineargradient(x1:0,y1:0,x2:1,y2:0,
+        stop:0 #145DB2, stop:1 #1877F2);
+}
+QPushButton#btn_guardar:pressed { background-color: #0F4A99; }
+              </string>
+             </property>
+             <property name="text">
+              <string>💾  Guardar</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btn_eliminar_perfil">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>72</family>
+               <pointsize>10</pointsize>
+               <fontweight>DemiBold</fontweight>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
+QPushButton#btn_eliminar_perfil {
+    background-color: transparent;
+    color: #E05070;
+    border: 2px solid #7A4A55;
+    border-radius: 8px;
+    font-family: &quot;72&quot;;
+    font-size: 10pt;
+    font-weight: 600;
+    padding: 6px 12px;
+}
+QPushButton#btn_eliminar_perfil:hover {
+    background-color: #2A1520;
+    color: #FF5577;
+    border-color: #E05070;
+}
+QPushButton#btn_eliminar_perfil:pressed {
+    background-color: #200F18;
+    color: #FF3355;
+}
+              </string>
+             </property>
+             <property name="text">
+              <string>✕  Eliminar</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="vl_lista_area">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="hl_lista_header">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lbl_sec_perfiles">
+            <property name="styleSheet">
+             <string notr="true">
+color: #3A5080;
+font-family: &quot;72&quot;;
+font-size: 7.5pt;
+font-weight: 700;
+letter-spacing: 1px;
+background: transparent;
+border: none;
+             </string>
+            </property>
+            <property name="text">
+             <string>PERFILES CONFIGURADOS</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_conteo">
+            <property name="styleSheet">
+             <string notr="true">
+color: #FFFFFF;
+background-color: #1877F2;
+border-radius: 6px;
+font-family: &quot;72&quot;;
+font-size: 7.5pt;
+font-weight: 700;
+min-width: 18px;
+max-width: 28px;
+min-height: 18px;
+max-height: 18px;
+padding: 0px 4px;
+             </string>
+            </property>
+            <property name="text">
+             <string>0</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="sp_lista_h">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tbl_usuarios">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+QTableWidget#tbl_usuarios {
+    background-color: #161B27;
+    color: #A8B8D8;
+    font-family: &quot;72&quot;;
+    font-size: 13px;
+    border: 1.5px solid #232B3E;
+    border-radius: 10px;
+    padding: 4px;
+    gridline-color: #1E2840;
+    outline: none;
+}
+QTableWidget#tbl_usuarios::item {
+    padding: 8px;
+    border: none;
+}
+QTableWidget#tbl_usuarios::item:selected {
+    background-color: #1877F2;
+    color: #FFFFFF;
+    border-radius: 4px;
+}
+QTableWidget#tbl_usuarios::item:hover {
+    background-color: #1A2236;
+}
+QHeaderView::section {
+    background-color: #0D1117;
+    color: #1877F2;
+    font-family: &quot;72&quot;;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-bottom: 2px solid #1877F2;
+    padding: 6px;
+    text-align: left;
+}
+QTableCornerButton::section {
+    background-color: #0D1117;
+    border: none;
+    border-bottom: 2px solid #1877F2;
+}
+QHeaderView::section:vertical {
+    border-bottom: none;
+    border-right: none;
+    width: 0px;
+}
+QScrollBar:vertical {
+    background: #0D1117;
+    width: 6px;
+    border-radius: 3px;
+}
+QScrollBar::handle:vertical {
+    background: #232B3E;
+    border-radius: 3px;
+    min-height: 20px;
+}
+QScrollBar::handle:vertical:hover { background: #1877F2; }
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical { height: 0px; }
+QScrollBar:horizontal {
+    background: #0D1117;
+    height: 6px;
+    border-radius: 3px;
+}
+QScrollBar::handle:horizontal {
+    background: #232B3E;
+    border-radius: 3px;
+    min-width: 20px;
+}
+QScrollBar::handle:horizontal:hover { background: #1877F2; }
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal { width: 0px; }
+           </string>
+          </property>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>80</number>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>160</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Alias</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Usuario SAP</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Entorno</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Seleccionado</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
