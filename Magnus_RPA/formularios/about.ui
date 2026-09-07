@@ -245,7 +245,7 @@ QFrame#sep_card {
             <string notr="true">color: #A8B8D8;</string>
            </property>
            <property name="text">
-            <string>✉️ franco.lopez@crediopciones.com</string>
+            <string>✉️ alfredo.jimenez@crediopciones.com</string>
            </property>
           </widget>
          </item>
@@ -278,7 +278,7 @@ QFrame#sep_card {
             <string notr="true">color: #A8B8D8;</string>
            </property>
            <property name="text">
-            <string>🆔 13581</string>
+            <string>🆔 11734</string>
            </property>
           </widget>
          </item>
@@ -312,7 +312,7 @@ QFrame#sep_card {
             <string notr="true">color: #075E54;</string>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;💾 1.0.0 versión estable&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;💾 0.0.1 version beta&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
