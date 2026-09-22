@@ -1,0 +1,42 @@
+{
+    "ejecucion_info": {
+        "fecha": "14.09.2026",
+        "hora_inicio": "14:19:26",
+        "hora_fin": "14:19:29",
+        "archivo_procesado": "C:/Users/avjimenez/Desktop/Magnus_RPA/Formato SV.xlsx",
+        "metodo_detectado": 3,
+        "operador": "avjimenez"
+    },
+    "eventos_detallados": [
+        {
+            "timestamp": "14:19:26",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "🚀 >>> INICIANDO PROCESO RPA (Silencioso=False, Logs=True) <<<"
+        },
+        {
+            "timestamp": "14:19:26",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "--- INICIANDO SCRIPT DE COBROS (MÉTODO 3 - SV17) ---"
+        },
+        {
+            "timestamp": "14:19:28",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "ERROR CRÍTICO: (-2147023170, 'Error en la llamada a procedimiento remoto.', None, None)"
+        },
+        {
+            "timestamp": "14:19:29",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "--- ✅ PROCESO COMPLETADO ---"
+        }
+    ],
+    "resumen_final": {
+        "exitosos": 0,
+        "errores": 0,
+        "omitidos": 0,
+        "monto_total_q": 0.0
+    }
+}

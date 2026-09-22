@@ -31,7 +31,8 @@ def cargar_resumen():
         "por_metodo": {},
         "por_sociedad": {
             "GT03": {"exitosos": 0, "errores": 0, "omitidos": 0},
-            "GT09": {"exitosos": 0, "errores": 0, "omitidos": 0}
+            "GT09": {"exitosos": 0, "errores": 0, "omitidos": 0},
+            "SV17": {"exitosos": 0, "errores": 0, "omitidos": 0}
         },
         "por_fecha": [],
         "errores_frecuentes": {},
@@ -121,7 +122,7 @@ class DemoDashboardFull(QMainWindow):
         # Barras: Análisis de Errores Frecuentes
         row_mid.addWidget(self._wrap(self._barras_errores()))
 
-        # Barras: GT03 vs GT09
+        # Barras: resultados por sociedad
         ps = self.data.get("por_sociedad", {})
         row_mid.addWidget(self._wrap(self._barras_sociedad(ps)))
 
@@ -212,7 +213,11 @@ class DemoDashboardFull(QMainWindow):
         return c
 
     def _barras_sociedad(self, ps):
-        sociedades = ["GT03", "GT09"]
+        orden_base = ["GT03", "GT09", "SV17"]
+        sociedades = [s for s in orden_base if s in ps]
+        sociedades.extend(sorted(s for s in ps.keys() if s not in orden_base))
+        if not sociedades:
+            sociedades = orden_base
 
         def _set(nombre, clave, color):
             b = QBarSet(nombre)

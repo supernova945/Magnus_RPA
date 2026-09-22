@@ -9,7 +9,7 @@ import json
 import subprocess
 from datetime import datetime
 
-from metodos import metodo_01, metodo_02
+from metodos import metodo_01, metodo_02, metodo_03
 from metodos.sap_conexion import obtener_perfil_activo
 from PySide6.QtCore import QEvent, QObject, Qt, QThread, Signal
 from PySide6.QtGui import QColor, QIcon
@@ -115,7 +115,10 @@ def actualizar_resumen_acumulado(stats, metodo, duracion_s=0.0, eventos=None):
         for ev in eventos:
             soc = str(ev.get("sociedad", "")).strip().upper()
             tipo = ev.get("tipo", "")
-            if soc in data["por_sociedad"]:
+            if soc:
+                data["por_sociedad"].setdefault(
+                    soc, {"exitosos": 0, "errores": 0, "omitidos": 0}
+                )
                 if tipo == "EXITO":
                     data["por_sociedad"][soc]["exitosos"] += 1
                 elif tipo == "ERROR":
@@ -682,10 +685,17 @@ class MagnusApp(QObject):
                 self.escribir_log("🔍 Método 1 detectado automáticamente.")
                 self._precargar_grid_excel(df_completo, 1)
             # Columnas clave del Metodo 2
-            elif "monto_total" in cols and "comentario" in cols:
+            elif "monto_total" in cols and "comentario" in cols and "no_boleta" in cols:
                 self.metodo_auto_detectado = 2
                 self.escribir_log("🔍 Método 2 detectado automáticamente.")
                 self._precargar_grid_excel(df_completo, 2)
+            # NUEVO: Columnas clave del Método 3 (El Salvador - Formato SV)
+            elif "monto_total" in cols and "asesor" in cols and "comentario" in cols:
+                self.metodo_auto_detectado = 3
+                self.escribir_log(
+                    "🔍 Método 3 (El Salvador) detectado automáticamente."
+                )
+                self._precargar_grid_excel(df_completo, 3)
             else:
                 msg = (
                     "⚠️ El Archivo no cuadra con la estructura del Método 1 ni Método 2."
@@ -742,7 +752,7 @@ class MagnusApp(QObject):
                     str(row.get("cuenta_banco", "")).replace(".0", "").strip(),
                     str(row.get("fecha_deposito", "")),
                 ]
-            else:
+            elif metodo == 2:
                 fila = [
                     str(row.get("sociedad", "")),
                     str(row.get("id_cliente", "")).replace(".0", "").strip(),
@@ -751,16 +761,18 @@ class MagnusApp(QObject):
                     str(row.get("cuenta_banco", "")).replace(".0", "").strip(),
                     str(row.get("fecha_documento", "")),
                 ]
+            elif metodo == 3:  # NUEVO METODO 3 (SV)
+                fila = [
+                    "SV17",  # Forzamos la vista a la sociedad fija
+                    str(row.get("id_cliente", "")).replace(".0", "").strip(),
+                    str(row.get("asesor", ""))
+                    .replace(".0", "")
+                    .strip(),  # Lo usamos en lugar del doc/boleta en la tabla
+                    "1",  # Forzamos la clase de pago en la vista
+                    "N/A",  # No hay banco en este formato
+                    str(row.get("fecha_documento", "")),
+                ]
             self.datos_grid.append(fila)
-
-        # Leer filas por página del combobox
-        if hasattr(self.ui, "cmb_filas_por_pagina"):
-            try:
-                self.filas_por_pagina = int(self.ui.cmb_filas_por_pagina.currentText())
-            except:
-                self.filas_por_pagina = 50
-
-        self._renderizar_pagina()
 
     def _renderizar_pagina(self):
         """Dibuja en tbl_archivo únicamente las filas de la página actual"""
@@ -925,17 +937,21 @@ class MagnusApp(QObject):
         modulo_seleccionado = None
 
         # Validación de Método autodetectado (La UI ya no tiene los RadioButtons)
+        # Validación de Método autodetectado
         if getattr(self, "metodo_auto_detectado", None) == 1:
             modulo_seleccionado = metodo_01
 
         elif getattr(self, "metodo_auto_detectado", None) == 2:
             modulo_seleccionado = metodo_02
 
+        elif getattr(self, "metodo_auto_detectado", None) == 3:
+            modulo_seleccionado = metodo_03  # Asignamos el nuevo método
+
         else:
             QMessageBox.warning(
                 self.ventana,
                 "Atención",
-                "El archivo Excel insertado no cuenta con el formato correcto del Método 1 o Método 2.",
+                "El archivo Excel insertado no cuenta con el formato correcto.",
             )
             return
 

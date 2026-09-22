@@ -1,0 +1,63 @@
+{
+    "total": {
+        "exitosos": 0,
+        "errores": 5,
+        "omitidos": 0,
+        "monto": 0.0,
+        "num_ejecuciones": 54,
+        "duracion_total_s": 256.6
+    },
+    "por_metodo": {
+        "3": {
+            "ejecuciones": 54,
+            "exitosos": 0,
+            "errores": 5,
+            "omitidos": 0,
+            "monto": 0.0
+        }
+    },
+    "por_sociedad": {
+        "GT03": {
+            "exitosos": 0,
+            "errores": 0,
+            "omitidos": 0
+        },
+        "GT09": {
+            "exitosos": 0,
+            "errores": 0,
+            "omitidos": 0
+        }
+    },
+    "por_fecha": [
+        {
+            "fecha": "11.09.2026",
+            "exitosos": 0,
+            "errores": 0,
+            "monto": 0.0,
+            "duracion_s": 148.4
+        },
+        {
+            "fecha": "14.09.2026",
+            "exitosos": 0,
+            "errores": 0,
+            "monto": 0.0,
+            "duracion_s": 46.6
+        },
+        {
+            "fecha": "18.09.2026",
+            "exitosos": 0,
+            "errores": 0,
+            "monto": 0.0,
+            "duracion_s": 49.7
+        },
+        {
+            "fecha": "22.09.2026",
+            "exitosos": 0,
+            "errores": 5,
+            "monto": 0.0,
+            "duracion_s": 11.9
+        }
+    ],
+    "errores_frecuentes": {},
+    "ultima_actualizacion": "22.09.2026 11:14:18"
+}
