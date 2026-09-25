@@ -1,19 +1,19 @@
 {
     "total": {
-        "exitosos": 0,
-        "errores": 5,
-        "omitidos": 0,
-        "monto": 0.0,
-        "num_ejecuciones": 54,
-        "duracion_total_s": 256.6
+        "exitosos": 10,
+        "errores": 36,
+        "omitidos": 4,
+        "monto": 5388.24,
+        "num_ejecuciones": 72,
+        "duracion_total_s": 1160.1
     },
     "por_metodo": {
         "3": {
-            "ejecuciones": 54,
-            "exitosos": 0,
-            "errores": 5,
-            "omitidos": 0,
-            "monto": 0.0
+            "ejecuciones": 72,
+            "exitosos": 10,
+            "errores": 36,
+            "omitidos": 4,
+            "monto": 5388.24
         }
     },
     "por_sociedad": {
@@ -55,9 +55,23 @@
             "exitosos": 0,
             "errores": 5,
             "monto": 0.0,
-            "duracion_s": 11.9
+            "duracion_s": 28.3
+        },
+        {
+            "fecha": "24.09.2026",
+            "exitosos": 4,
+            "errores": 23,
+            "monto": 3888.24,
+            "duracion_s": 530.9
+        },
+        {
+            "fecha": "25.09.2026",
+            "exitosos": 6,
+            "errores": 8,
+            "monto": 1500.0,
+            "duracion_s": 356.2
         }
     ],
     "errores_frecuentes": {},
-    "ultima_actualizacion": "22.09.2026 11:14:18"
+    "ultima_actualizacion": "25.09.2026 10:13:25"
 }

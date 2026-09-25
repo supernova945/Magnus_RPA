@@ -1,0 +1,3 @@
+﻿sociedad;id_cliente;fecha_documento;monto_total;clase_pago;comentario;asesor;nota_credito;usuario_sap;fecha;hora;resultado_01;resultado_02;cobro_01;cobro_02;cobro_03;cobro_04;cobro_05;cobro_06;cobro_07;cobro_08;cobro_09;cobro_10
+SV17;101848405;24.09.2026;150;1;COBRO PAGARE;PX 22.09.2026;2151;;;;Error: (-2147023174, 'El servidor RPC no está disponible.', None, None);;;;;;;;;;;
+SV17;101912486;24.09.2026;350;1;COBRO PAGARE;PX 22.09.2026;2151;;;;Error: (-2147023174, 'El servidor RPC no está disponible.', None, None);;;;;;;;;;;
