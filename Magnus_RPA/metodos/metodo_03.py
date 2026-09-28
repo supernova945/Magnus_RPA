@@ -122,7 +122,6 @@ def postear_pago_sv(
             popup_id = "wnd[1]/usr/sub:SAPLSPO4:0300"
             try:
                 if es_factura:
-                    # Pago 1: Concepto y Fecha
                     try:
                         session.findById(
                             f"{popup_id}/ctxtSVALD-VALUE[0,21]"
@@ -136,14 +135,12 @@ def postear_pago_sv(
                     except:
                         pass
                 else:
-                    # Pago 2: Observaciones
                     try:
                         session.findById(
                             f"{popup_id}/txtSVALD-VALUE[3,21]"
                         ).text = datos_cabecera["asesor"]
                     except:
                         pass
-
                 session.findById("wnd[1]/tbar[0]/btn[0]").press()
             except Exception:
                 try:
@@ -162,7 +159,6 @@ def postear_pago_sv(
         if session.Children.Count > 1:
             popup_id2 = "wnd[1]/usr/sub:SAPLSPO4:0300"
             try:
-                # Ponemos "1" y "1"
                 try:
                     session.findById(f"{popup_id2}/txtSVALD-VALUE[0,21]").text = "1"
                 except:
@@ -171,7 +167,6 @@ def postear_pago_sv(
                     session.findById(f"{popup_id2}/txtSVALD-VALUE[1,21]").text = "1"
                 except:
                     pass
-
                 session.findById("wnd[1]/tbar[0]/btn[0]").press()
             except Exception:
                 try:
@@ -209,16 +204,11 @@ def postear_pago_sv(
             pass
 
         return True, msg_out
-
     except Exception as e:
         return False, str(e)
 
 
 def contabilizar_cuenta_mayor_sv(session, datos, print_log):
-    """
-    Función que postea a cuenta de mayor (Pestaña 3).
-    Se ha eliminado la orden de "Cerrar Caja" (btn[7]) a petición del usuario.
-    """
     try:
         print_log("Navegando a pestaña 3 (Pago cuenta de mayor SV)...")
         session.findById("wnd[0]/usr/tabsTABCONTROL/tabpTABBTN3").select()
@@ -228,39 +218,31 @@ def contabilizar_cuenta_mayor_sv(session, datos, print_log):
             "wnd[0]/usr/tabsTABCONTROL/tabpTABBTN3/ssubWORK_SCREEN:/DBM/MT_TILL:2006"
         )
 
-        # Tipo de Transacción (2151)
         busitrans = datos.get("nota_credito", "2151")
         if not busitrans or busitrans == "nan":
             busitrans = "2151"
         session.findById(f"{base_work}/cmb/DBM/T_WA_DOC_LINE-BUSITRANS").key = busitrans
-
-        # Importe Total a Cortar
         session.findById(f"{base_work}/txt/DBM/T_WA_DOC_LINE-AMOUNT").text = datos[
             "monto_total"
         ]
 
-        # Texto Contable
         fecha_hoy = datetime.now().strftime("%d.%m.%Y")
         session.findById(
             f"{base_work}/txt/DBM/T_WA_DOC_LINE-ITEM_TEXT"
         ).text = f"CORTE DE CAJA {fecha_hoy}"
 
-        # Añadir Partida (ADD_POSS)
         session.findById(f"{base_work}/btnADD_POSS").press()
         time.sleep(1)
 
-        # Clase Pago y Texto de Cabecera
         session.findById(
             f"{base_work}/cmb/DBM/T_WA_WORK_LINE-PAYMENT_TYPE"
         ).key = datos["clase_pago"]
-
         fecha_header = datetime.now().strftime("%d%m%Y")
         session.findById(
             f"{base_work}/txt/DBM/T_WA_WORK_LINE-HEADER_TXT"
         ).text = fecha_header
         session.findById(f"{base_work}/txt/DBM/T_WA_WORK_LINE-HEADER_TXT").setFocus()
 
-        # Contabilizar el Corte (btn[5] en SV17)
         print_log("Contabilizando en cuenta de mayor SV...")
         try:
             session.findById("wnd[0]/tbar[1]/btn[5]").press()
@@ -268,7 +250,6 @@ def contabilizar_cuenta_mayor_sv(session, datos, print_log):
             session.findById("wnd[0]/tbar[1]/btn[17]").press()
         time.sleep(1)
 
-        # Confirmaciones de impresión/salida
         try:
             session.findById("wnd[1]/tbar[0]/btn[0]").press()
         except:
@@ -349,6 +330,7 @@ def ejecutar(
         else:
             df = pd.read_excel(ruta_excel, header=0, dtype=str)
 
+        # AQUÍ ESTABA EL BUG DE LA BASE DE DATOS. SE ELIMINARON LAS 10 COLUMNAS DE "COBRO_XX"
         columnas_finales = [
             "sociedad",
             "id_cliente",
@@ -364,8 +346,6 @@ def ejecutar(
             "resultado_01",
             "resultado_02",
         ]
-        for i in range(1, 11):
-            columnas_finales.append(f"cobro_{i:02d}")
 
         for col in columnas_finales:
             if col not in df.columns:
@@ -381,10 +361,7 @@ def ejecutar(
 
     SOCIEDAD_SV = "SV17"
     CLASE_PAGO_SV = "01"
-
     sociedad_actual_sap = None
-
-    # --- VARIABLES PARA EL CORTE GLOBAL ---
     gran_total_cierre = 0.0
     cierre_clase_pago = CLASE_PAGO_SV
     cierre_nota_credito = "2151"
@@ -393,9 +370,7 @@ def ejecutar(
         try:
             if not hay_internet(timeout=1):
                 raise Exception("com_error_preventivo: Desconexión de red detectada.")
-
-            porcentaje = (index + 1) / total_filas
-            progress_callback(porcentaje)
+            progress_callback((index + 1) / total_filas)
 
             if check_stop():
                 print_log("[!!!] DETENIDO POR USUARIO")
@@ -405,14 +380,14 @@ def ejecutar(
             txt_res_capital = ""
             capital_pagado_monto = 0.0
 
-            ya_procesado_1 = str(row["resultado_01"]).strip() not in ["", "nan"]
-            ya_procesado_2 = str(row["resultado_02"]).strip() not in ["", "nan"]
+            ya_procesado_1 = str(row.get("resultado_01", "")).strip() not in ["", "nan"]
+            ya_procesado_2 = str(row.get("resultado_02", "")).strip() not in ["", "nan"]
 
             if ya_procesado_1 or ya_procesado_2:
                 stats["omitidos"] += 1
                 continue
 
-            id_cliente = str(row["id_cliente"]).replace(".0", "").strip()
+            id_cliente = str(row.get("id_cliente", "")).replace(".0", "").strip()
             if not id_cliente or id_cliente.lower() == "nan":
                 stats["omitidos"] += 1
                 if tabla_callback:
@@ -450,9 +425,7 @@ def ejecutar(
                     f"[{index + 1}] Cte: {id_cliente} | Disp: {monto_disponible} | Ref: {datos_cabecera['comentario']}"
                 )
 
-            # ==================================================================
-            # FASE 1: PRIMER PAGO (Facturas / 00MS)
-            # ==================================================================
+            # FASE 1: 00MS
             facturas_pagadas_monto = 0.0
             if ir_a_transaccion_y_cargar_cliente(
                 session, id_cliente, SOCIEDAD_SV, sociedad_actual_sap
@@ -461,18 +434,14 @@ def ejecutar(
                 grid = session.findById(
                     "wnd[0]/usr/tabsTABCONTROL/tabpTABBTN1/ssubWORK_SCREEN:/DBM/MT_TILL:2002/subWORKING_AREA:/DBM/MT_TILL:2004/cntlOPEN_ITEM_CON/shellcont/shell"
                 )
-
                 lista_facturas = []
                 if grid.RowCount > 0:
                     for r in range(grid.RowCount):
                         doc_sap = str(grid.GetCellValue(r, "BELNR")).strip()
-
                         try:
                             cpag = str(grid.GetCellValue(r, "ZTERM")).strip().upper()
                         except:
                             cpag = ""
-
-                        # CRITERIO EL SALVADOR: Es factura si CPag es "00MS" o el doc empieza con 54 o 97
                         if (
                             cpag == "00MS"
                             or doc_sap.startswith("54")
@@ -484,14 +453,8 @@ def ejecutar(
                             )
 
                 total_facturas = sum(f["monto"] for f in lista_facturas)
-
                 if total_facturas > 0 and monto_disponible >= (total_facturas - 0.01):
-                    if detallado:
-                        print_log(
-                            f"   -> Pagando Primer Registro (00MS): Q.{total_facturas}"
-                        )
                     filas_fact = [f["fila"] for f in lista_facturas]
-
                     exito, msg = postear_pago_sv(
                         session,
                         filas_fact,
@@ -499,11 +462,10 @@ def ejecutar(
                         datos_cabecera,
                         es_factura=True,
                     )
-
                     if exito:
                         facturas_pagadas_monto = total_facturas
                         monto_disponible -= total_facturas
-                        txt_res_facturas = f"Pago 1 OK ({total_facturas})"
+                        txt_res_facturas = f"Exito Pago 1 ({total_facturas})"
                         stats["monto"] += total_facturas
                     else:
                         txt_res_facturas = f"Err Pago 1: {msg}"
@@ -512,31 +474,24 @@ def ejecutar(
                         txt_res_facturas = "Saldo insuficiente"
                         monto_disponible = 0
 
-            # ==================================================================
-            # FASE 2: SEGUNDO PAGO (Capital / Restante)
-            # ==================================================================
+            # FASE 2: CAPITAL
             if monto_disponible > 0.01:
                 if facturas_pagadas_monto > 0:
                     if ir_a_transaccion_y_cargar_cliente(
                         session, id_cliente, SOCIEDAD_SV, sociedad_actual_sap
                     ):
                         sociedad_actual_sap = SOCIEDAD_SV
-
                 grid = session.findById(
                     "wnd[0]/usr/tabsTABCONTROL/tabpTABBTN1/ssubWORK_SCREEN:/DBM/MT_TILL:2002/subWORKING_AREA:/DBM/MT_TILL:2004/cntlOPEN_ITEM_CON/shellcont/shell"
                 )
-
                 lista_capital = []
                 if grid.RowCount > 0:
                     for r in range(grid.RowCount):
                         doc_sap = str(grid.GetCellValue(r, "BELNR")).strip()
-
                         try:
                             cpag = str(grid.GetCellValue(r, "ZTERM")).strip().upper()
                         except:
                             cpag = ""
-
-                        # CRITERIO EL SALVADOR: Procesamos el resto (Lo que NO sea 00MS ni empiece con 54)
                         if (
                             cpag != "00MS"
                             and not doc_sap.startswith("54")
@@ -550,7 +505,6 @@ def ejecutar(
                     filas_a_pagar = []
                     monto_a_procesar_cap = 0.0
                     temp_disponible = monto_disponible
-
                     for item in lista_capital:
                         if temp_disponible > 0.01:
                             pagar = round(min(item["monto"], temp_disponible), 2)
@@ -563,10 +517,6 @@ def ejecutar(
                             break
 
                     if filas_a_pagar:
-                        if detallado:
-                            print_log(
-                                f"   -> Pagando Restante (Capital): Q.{monto_a_procesar_cap}"
-                            )
                         exito, msg = postear_pago_sv(
                             session,
                             filas_a_pagar,
@@ -575,7 +525,7 @@ def ejecutar(
                             es_factura=False,
                         )
                         if exito:
-                            txt_res_capital = f"Pago 2 OK ({monto_a_procesar_cap})"
+                            txt_res_capital = f"Exito Pago 2 ({monto_a_procesar_cap})"
                             stats["monto"] += monto_a_procesar_cap
                             capital_pagado_monto = monto_a_procesar_cap
                         else:
@@ -585,7 +535,6 @@ def ejecutar(
                 else:
                     txt_res_capital = "Grid Vacio"
 
-            # --- ACUMULAR PARA LA CUENTA DE MAYOR FINAL ---
             monto_total_cobrado = facturas_pagadas_monto + capital_pagado_monto
             txt_cierre = ""
             if monto_total_cobrado > 0:
@@ -594,7 +543,6 @@ def ejecutar(
                 cierre_nota_credito = datos_cabecera["nota_credito"]
                 txt_cierre = "En espera de contab. mayor"
 
-            # --- ESCRITURA EN EXCEL DE ESTA FILA ---
             df.at[index, "fecha"] = datetime.now().strftime("%d.%m.%Y")
             df.at[index, "hora"] = datetime.now().strftime("%H:%M:%S")
             df.at[index, "usuario_sap"] = sap_user
@@ -605,11 +553,9 @@ def ejecutar(
             res_01 = f"1: {txt_res_facturas} | 2: {txt_res_capital}".strip(" | ")
             res_02 = txt_cierre
 
-            # Guardamos los resultados
             df.at[index, "resultado_01"] = res_01
             df.at[index, "resultado_02"] = res_02
 
-            # EVALUACIÓN DE LAS MÉTRICAS DE ÉXITO O ERROR (Ignorando la "Espera")
             estado_visual = res_01
             if "err " in estado_visual.lower() or "error" in estado_visual.lower():
                 stats["errores"] += 1
@@ -625,7 +571,7 @@ def ejecutar(
                     SOCIEDAD_SV,
                     CLASE_PAGO_SV,
                     "N/A",
-                    datos_cabecera["fecha_doc"],
+                    str(row.get("fecha_documento", "")),
                 )
 
         except Exception as e_gral:
@@ -644,9 +590,6 @@ def ejecutar(
                 df.at[index, "resultado_01"] = f"Error: {e_gral}"
                 stats["errores"] += 1
 
-    # ==================================================================
-    # CONTABILIZACIÓN A CUENTA DE MAYOR FINAL (POR EL GRAN TOTAL ACUMULADO)
-    # ==================================================================
     if gran_total_cierre > 0 and not check_stop():
         gran_total_cierre = round(gran_total_cierre, 2)
         print_log(
@@ -663,12 +606,11 @@ def ejecutar(
             session, datos_cuenta_mayor, print_log
         )
         resultado_cierre_global = (
-            f"Cuenta Mayor OK: {msj_cierre}"
+            f"Exito Cuenta Mayor: {msj_cierre}"
             if cierre_ok
             else f"Err Mayor: {msj_cierre}"
         )
 
-        # Actualizamos masivamente el Excel de los clientes que estaban en espera
         df["resultado_02"] = df["resultado_02"].replace(
             "En espera de contab. mayor", resultado_cierre_global
         )

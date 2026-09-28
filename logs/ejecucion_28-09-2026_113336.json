@@ -1,0 +1,132 @@
+{
+    "ejecucion_info": {
+        "fecha": "28.09.2026",
+        "hora_inicio": "11:32:35",
+        "hora_fin": "11:33:36",
+        "archivo_procesado": "C:/Users/avjimenez/Desktop/Magnus_RPA/Formato SV.xlsx",
+        "metodo_detectado": 3,
+        "operador": "avjimenez"
+    },
+    "eventos_detallados": [
+        {
+            "timestamp": "11:32:35",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "🚀 >>> INICIANDO PROCESO RPA (Silencioso=False, Logs=True) <<<"
+        },
+        {
+            "timestamp": "11:32:36",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "--- INICIANDO SCRIPT DE COBROS (MÉTODO 3 SV) ---"
+        },
+        {
+            "timestamp": "11:32:36",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "Registros cargados: 2"
+        },
+        {
+            "timestamp": "11:32:36",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "[1] Cte: 101848405 | Disp: 150.0 | Ref: COBRO PAGARE"
+        },
+        {
+            "timestamp": "11:32:41",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "   -> Pagando Primer Registro (00MS): Q.12.39"
+        },
+        {
+            "timestamp": "11:32:50",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "   -> Pagando Restante (Capital): Q.137.61"
+        },
+        {
+            "timestamp": "11:32:58",
+            "tipo": "INFO",
+            "semaforo": "NEUTRAL",
+            "sociedad": "SV17",
+            "cliente": "101848405",
+            "documento": "PX 22.09.2026",
+            "clase_pago": "01",
+            "banco": "N/A",
+            "fecha_doc": "24.09.2026",
+            "mensaje": "exito | f1: pagado (12.39) | f2: pagado (137.61) | pendiente mayor"
+        },
+        {
+            "timestamp": "11:32:58",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "[2] Cte: 101912486 | Disp: 350.0 | Ref: COBRO PAGARE"
+        },
+        {
+            "timestamp": "11:33:01",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "   -> Pagando Primer Registro (00MS): Q.328.4"
+        },
+        {
+            "timestamp": "11:33:13",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "   -> Pagando Restante (Capital): Q.21.6"
+        },
+        {
+            "timestamp": "11:33:22",
+            "tipo": "INFO",
+            "semaforo": "NEUTRAL",
+            "sociedad": "SV17",
+            "cliente": "101912486",
+            "documento": "PX 22.09.2026",
+            "clase_pago": "01",
+            "banco": "N/A",
+            "fecha_doc": "24.09.2026",
+            "mensaje": "exito | f1: pagado (328.4) | f2: pagado (21.6) | pendiente mayor"
+        },
+        {
+            "timestamp": "11:33:22",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "--- EJECUTANDO CONTABILIZACIÓN A CUENTA DE MAYOR POR GRAN TOTAL: Q.500.0 ---"
+        },
+        {
+            "timestamp": "11:33:22",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "Navegando a pestaña 3 (Pago cuenta de mayor SV)..."
+        },
+        {
+            "timestamp": "11:33:27",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "Contabilizando en cuenta de mayor SV..."
+        },
+        {
+            "timestamp": "11:33:36",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "Resultado Cuenta Mayor: Se ha creado documento de contabilización 1300013628 para documento de caja 2467408"
+        },
+        {
+            "timestamp": "11:33:36",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "Guardando archivo CSV definitivo..."
+        },
+        {
+            "timestamp": "11:33:36",
+            "tipo": "SISTEMA",
+            "semaforo": "NEUTRAL",
+            "mensaje": "--- ✅ PROCESO COMPLETADO ---"
+        }
+    ],
+    "resumen_final": {
+        "exitosos": 2,
+        "errores": 0,
+        "omitidos": 0,
+        "monto_total_q": 500.0
+    }
+}

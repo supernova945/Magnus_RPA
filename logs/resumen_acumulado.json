@@ -1,19 +1,19 @@
 {
     "total": {
-        "exitosos": 10,
-        "errores": 36,
+        "exitosos": 25,
+        "errores": 48,
         "omitidos": 4,
-        "monto": 5388.24,
-        "num_ejecuciones": 72,
-        "duracion_total_s": 1160.1
+        "monto": 9507.43,
+        "num_ejecuciones": 83,
+        "duracion_total_s": 1711.4
     },
     "por_metodo": {
         "3": {
-            "ejecuciones": 72,
-            "exitosos": 10,
-            "errores": 36,
+            "ejecuciones": 83,
+            "exitosos": 25,
+            "errores": 48,
             "omitidos": 4,
-            "monto": 5388.24
+            "monto": 9507.43
         }
     },
     "por_sociedad": {
@@ -25,6 +25,11 @@
         "GT09": {
             "exitosos": 0,
             "errores": 0,
+            "omitidos": 0
+        },
+        "SV17": {
+            "exitosos": 2,
+            "errores": 1,
             "omitidos": 0
         }
     },
@@ -70,8 +75,17 @@
             "errores": 8,
             "monto": 1500.0,
             "duracion_s": 356.2
+        },
+        {
+            "fecha": "28.09.2026",
+            "exitosos": 15,
+            "errores": 12,
+            "monto": 4119.19,
+            "duracion_s": 551.3
         }
     ],
-    "errores_frecuentes": {},
-    "ultima_actualizacion": "25.09.2026 10:13:25"
+    "errores_frecuentes": {
+        "error | f1: pagado (12.39) | f2: error: (-2147023174, 'el se": 1
+    },
+    "ultima_actualizacion": "28.09.2026 14:45:38"
 }
