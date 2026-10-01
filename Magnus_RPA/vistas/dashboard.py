@@ -1,18 +1,32 @@
-import sys
-import os
 import json
-from datetime import datetime
+import os
+import sys
 
-from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
-                               QHBoxLayout, QFrame, QLabel)
-from PySide6.QtCharts import (QChart, QChartView, QPieSeries, QBarSeries,
-                              QBarSet, QBarCategoryAxis, QValueAxis)
-from PySide6.QtGui import QPainter, QFont, QColor, QPen
+from PySide6.QtCharts import (
+    QBarCategoryAxis,
+    QBarSeries,
+    QBarSet,
+    QChart,
+    QChartView,
+    QPieSeries,
+    QValueAxis,
+)
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QColor, QFont, QPainter, QPen
+from PySide6.QtWidgets import (
+    QApplication,
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QVBoxLayout,
+    QWidget,
+)
 
 # Constant for ROI calculation (Estimated time a human takes per record in seconds)
 # 2 minutes = 120 seconds
-MANUAL_TIME_PER_RECORD = 120 
+MANUAL_TIME_PER_RECORD = 120
+
 
 def cargar_resumen():
     """Carga el resumen acumulado de logs/ o devuelve estructura vacía."""
@@ -21,23 +35,24 @@ def cargar_resumen():
     ruta = os.path.join(base, "logs", "resumen_acumulado.json")
     if os.path.exists(ruta):
         try:
-            with open(ruta, 'r', encoding='utf-8') as f:
+            with open(ruta, "r", encoding="utf-8") as f:
                 return json.load(f)
         except:
             pass
     # Si no existe, devuelve datos vacíos
     return {
-        "total":    {"exitosos": 0, "errores": 0, "omitidos": 0, "monto": 0.0},
+        "total": {"exitosos": 0, "errores": 0, "omitidos": 0, "monto": 0.0},
         "por_metodo": {},
         "por_sociedad": {
             "GT03": {"exitosos": 0, "errores": 0, "omitidos": 0},
             "GT09": {"exitosos": 0, "errores": 0, "omitidos": 0},
-            "SV17": {"exitosos": 0, "errores": 0, "omitidos": 0}
+            "SV17": {"exitosos": 0, "errores": 0, "omitidos": 0},
         },
         "por_fecha": [],
         "errores_frecuentes": {},
-        "ultima_actualizacion": "Sin ejecuciones registradas aún"
+        "ultima_actualizacion": "Sin ejecuciones registradas aún",
     }
+
 
 # =====================================================================
 # CLASE PRINCIPAL DEL DASHBOARD
@@ -58,11 +73,11 @@ class DemoDashboardFull(QMainWindow):
         root.setSpacing(12)
 
         # Extraer datos base
-        total    = self.data.get("total", {})
+        total = self.data.get("total", {})
         exitosos = total.get("exitosos", 0)
-        errores  = total.get("errores",  0)
+        errores = total.get("errores", 0)
         omitidos = total.get("omitidos", 0)
-        monto    = total.get("monto",    0.0)
+        monto = total.get("monto", 0.0)
         total_reg = exitosos + errores + omitidos
         tasa_exito = f"{exitosos / total_reg * 100:.1f}%" if total_reg > 0 else "N/A"
         ult_act = self.data.get("ultima_actualizacion", "—")
@@ -76,12 +91,18 @@ class DemoDashboardFull(QMainWindow):
 
         # ─── FILA 1A: KPIs Financieros ────────────────────────────────
         # Métricas de tiempo
-        num_ejec     = total.get("num_ejecuciones", 0)
-        dur_total_s  = total.get("duracion_total_s", 0.0)
-        dur_prom_s   = dur_total_s / num_ejec if num_ejec > 0 else 0.0
-        dur_prom_str = f"{int(dur_prom_s // 60)}m {int(dur_prom_s % 60)}s" if dur_prom_s > 0 else "N/A"
-        reg_por_min  = round(exitosos / (dur_total_s / 60), 1) if dur_total_s > 0 else 0.0
-        rpm_str      = f"{reg_por_min} reg/min" if reg_por_min > 0 else "N/A"
+        num_ejec = total.get("num_ejecuciones", 0)
+        dur_total_s = total.get("duracion_total_s", 0.0)
+        dur_prom_s = dur_total_s / num_ejec if num_ejec > 0 else 0.0
+        dur_prom_str = (
+            f"{int(dur_prom_s // 60)}m {int(dur_prom_s % 60)}s"
+            if dur_prom_s > 0
+            else "N/A"
+        )
+        reg_por_min = (
+            round(exitosos / (dur_total_s / 60), 1) if dur_total_s > 0 else 0.0
+        )
+        rpm_str = f"{reg_por_min} reg/min" if reg_por_min > 0 else "N/A"
 
         # Cálculo de ROI (Tiempo Ahorrado)
         tiempo_humano_s = total_reg * MANUAL_TIME_PER_RECORD
@@ -91,19 +112,37 @@ class DemoDashboardFull(QMainWindow):
 
         row_kpi1 = QHBoxLayout()
         row_kpi1.setSpacing(12)
-        row_kpi1.addWidget(self._tarjeta("💰 Importe Operado", f"$. {monto:,.2f}", "#161B27", "#1877F2"))
-        row_kpi1.addWidget(self._tarjeta("✅ Exitosos",         f"{exitosos:,}",    "#161B27", "#00CC6A"))
-        row_kpi1.addWidget(self._tarjeta("⚠️ Omitidos",        f"{omitidos:,}",    "#161B27", "#e3b341"))
-        row_kpi1.addWidget(self._tarjeta("❌ Errores",          f"{errores:,}",     "#161B27", "#f85149"))
+        row_kpi1.addWidget(
+            self._tarjeta(
+                "💰 Importe Operado", f"$. {monto:,.2f}", "#161B27", "#1877F2"
+            )
+        )
+        row_kpi1.addWidget(
+            self._tarjeta("✅ Exitosos", f"{exitosos:,}", "#161B27", "#00CC6A")
+        )
+        row_kpi1.addWidget(
+            self._tarjeta("⚠️ Omitidos", f"{omitidos:,}", "#161B27", "#e3b341")
+        )
+        row_kpi1.addWidget(
+            self._tarjeta("❌ Errores", f"{errores:,}", "#161B27", "#f85149")
+        )
         root.addLayout(row_kpi1)
 
         # ─── FILA 1B: KPIs de Rendimiento / ROI ────────────────────
         row_kpi2 = QHBoxLayout()
         row_kpi2.setSpacing(12)
-        row_kpi2.addWidget(self._tarjeta("🎯 Tasa de Éxito",   tasa_exito,         "#161B27", "#1877F2"))
-        row_kpi2.addWidget(self._tarjeta("⏳ Tiempo Ahorrado", ahorro_str,         "#161B27", "#00CC6A"))
-        row_kpi2.addWidget(self._tarjeta("⏱️ Duración Promedio", dur_prom_str,     "#161B27", "#1877F2"))
-        row_kpi2.addWidget(self._tarjeta("⚡ Velocidad RPA",    rpm_str,            "#161B27", "#1877F2"))
+        row_kpi2.addWidget(
+            self._tarjeta("🎯 Tasa de Éxito", tasa_exito, "#161B27", "#1877F2")
+        )
+        row_kpi2.addWidget(
+            self._tarjeta("⏳ Tiempo Ahorrado", ahorro_str, "#161B27", "#00CC6A")
+        )
+        row_kpi2.addWidget(
+            self._tarjeta("⏱️ Duración Promedio", dur_prom_str, "#161B27", "#1877F2")
+        )
+        row_kpi2.addWidget(
+            self._tarjeta("⚡ Velocidad RPA", rpm_str, "#161B27", "#1877F2")
+        )
         root.addLayout(row_kpi2)
 
         # ─── FILA 2: Pastel estado | Pastel método | Barras sociedad ───
@@ -111,13 +150,19 @@ class DemoDashboardFull(QMainWindow):
         row_mid.setSpacing(12)
 
         # Pastel: Distribución general
-        row_mid.addWidget(self._wrap(self._pastel(
-            "Distribución de Estados",
-            [("Éxito",   exitosos, "#00CC6A"),
-             ("Error",   errores,  "#f85149"),
-             ("Omitido", omitidos, "#e3b341")],
-            explotar="Éxito"
-        )))
+        row_mid.addWidget(
+            self._wrap(
+                self._pastel(
+                    "Distribución de Estados",
+                    [
+                        ("Éxito", exitosos, "#00CC6A"),
+                        ("Error", errores, "#f85149"),
+                        ("Omitido", omitidos, "#e3b341"),
+                    ],
+                    explotar="Éxito",
+                )
+            )
+        )
 
         # Barras: Análisis de Errores Frecuentes
         row_mid.addWidget(self._wrap(self._barras_errores()))
@@ -228,7 +273,7 @@ class DemoDashboardFull(QMainWindow):
 
         series = QBarSeries()
         series.append(_set("Exitosos", "exitosos", "#00CC6A"))
-        series.append(_set("Errores",  "errores",  "#f85149"))
+        series.append(_set("Errores", "errores", "#f85149"))
         series.append(_set("Omitidos", "omitidos", "#e3b341"))
 
         c = self._chart_base("Resultados por Sociedad")
@@ -253,13 +298,13 @@ class DemoDashboardFull(QMainWindow):
         errs = self.data.get("errores_frecuentes", {})
         # Ordenar por valor descendente y tomar los 3 primeros
         sorted_errs = sorted(errs.items(), key=lambda x: x[1], reverse=True)[:3]
-        
+
         if not sorted_errs:
             # Crear gráfico vacío para evitar errores
             c = self._chart_base("Top 3 Errores Frecuentes")
             return c
 
-        labels = [e[0] if len(e[0]) < 20 else e[0][:17]+"..." for e in sorted_errs]
+        labels = [e[0] if len(e[0]) < 20 else e[0][:17] + "..." for e in sorted_errs]
         valores = [e[1] for e in sorted_errs]
 
         set_err = QBarSet("Frecuencia")
@@ -289,11 +334,11 @@ class DemoDashboardFull(QMainWindow):
 
     def _tendencia(self, por_fecha):
         """Gráfica de barras: monto operado por fecha (últimos 15 días)."""
-        datos  = por_fecha[-15:]
+        datos = por_fecha[-15:]
         fechas = [d.get("fecha", "") for d in datos]
         montos = [round(d.get("monto", 0.0), 2) for d in datos]
 
-        set_m = QBarSet("Monto (Q.)")
+        set_m = QBarSet("Monto ($.)")
         set_m.setColor(QColor("#1877F2"))
         set_m.setPen(QPen(Qt.NoPen))
         set_m.append(montos if montos else [0])
@@ -326,7 +371,7 @@ class DemoDashboardFull(QMainWindow):
 
     def _duracion_por_fecha(self, por_fecha):
         """Gráfica de barras: duración de ejecuciones en minutos por fecha."""
-        datos  = por_fecha[-15:]
+        datos = por_fecha[-15:]
         fechas = [d.get("fecha", "") for d in datos]
         # Convertir segundos a minutos para mejor legibilidad
         minutos = [round(d.get("duracion_s", 0.0) / 60, 1) for d in datos]

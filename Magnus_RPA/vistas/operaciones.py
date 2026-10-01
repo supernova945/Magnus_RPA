@@ -684,19 +684,18 @@ class MagnusApp(QObject):
                 self.metodo_auto_detectado = 1
                 self.escribir_log("🔍 Método 1 detectado automáticamente.")
                 self._precargar_grid_excel(df_completo, 1)
+
+            # Columnas clave del Metodo 3 (El Salvador)
+            elif "sociedad" in cols and "asesor" in cols:
+                self.metodo_auto_detectado = 3
+                self.escribir_log("🔍 Método 3 (SV) detectado automáticamente.")
+                self._precargar_grid_excel(df_completo, 3)
+
             # Columnas clave del Metodo 2
-            elif "monto_total" in cols and "comentario" in cols and "no_boleta" in cols:
+            elif "monto_total" in cols and "comentario" in cols:
                 self.metodo_auto_detectado = 2
                 self.escribir_log("🔍 Método 2 detectado automáticamente.")
                 self._precargar_grid_excel(df_completo, 2)
-            # NUEVO: Columnas clave del Método 3 (El Salvador - Formato SV)
-            elif "monto_total" in cols and "asesor" in cols and "comentario" in cols:
-                self.metodo_auto_detectado = 3
-                self.escribir_log(
-                    "🔍 Método 3 (El Salvador) detectado automáticamente."
-                )
-                self._precargar_grid_excel(df_completo, 3)
-            else:
                 msg = (
                     "⚠️ El Archivo no cuadra con la estructura del Método 1 ni Método 2."
                 )
@@ -940,13 +939,10 @@ class MagnusApp(QObject):
         # Validación de Método autodetectado
         if getattr(self, "metodo_auto_detectado", None) == 1:
             modulo_seleccionado = metodo_01
-
         elif getattr(self, "metodo_auto_detectado", None) == 2:
             modulo_seleccionado = metodo_02
-
         elif getattr(self, "metodo_auto_detectado", None) == 3:
             modulo_seleccionado = metodo_03  # Asignamos el nuevo método
-
         else:
             QMessageBox.warning(
                 self.ventana,
@@ -1219,7 +1215,7 @@ class MagnusApp(QObject):
         )
 
         # Formatear la moneda
-        monto_str = f"Q. {stats.get('monto', 0):,.2f}"
+        monto_str = f"$. {stats.get('monto', 0):,.2f}"
         self.ui_resumen.lbl_monto_procesado.setText(
             f'<html><head/><body><p align="center"><span style=" font-size:20pt; font-weight:700;">{monto_str}</span></p></body></html>'
         )

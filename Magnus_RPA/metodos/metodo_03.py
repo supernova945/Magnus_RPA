@@ -330,7 +330,7 @@ def ejecutar(
         else:
             df = pd.read_excel(ruta_excel, header=0, dtype=str)
 
-        # AQUÍ ESTABA EL BUG DE LA BASE DE DATOS. SE ELIMINARON LAS 10 COLUMNAS DE "COBRO_XX"
+        # AQUI RESTAURAMOS LAS COLUMNAS EXACTAS QUE EXIGE LA BASE DE DATOS DE MAGNUS
         columnas_finales = [
             "sociedad",
             "id_cliente",
@@ -346,6 +346,10 @@ def ejecutar(
             "resultado_01",
             "resultado_02",
         ]
+
+        # INYECTAR LAS 10 COLUMNAS COBRO (Obligatorio para que no falle SQLite)
+        for i in range(1, 11):
+            columnas_finales.append(f"cobro_{i:02d}")
 
         for col in columnas_finales:
             if col not in df.columns:
@@ -593,7 +597,7 @@ def ejecutar(
     if gran_total_cierre > 0 and not check_stop():
         gran_total_cierre = round(gran_total_cierre, 2)
         print_log(
-            f"--- EJECUTANDO CONTABILIZACIÓN A CUENTA DE MAYOR POR GRAN TOTAL: Q.{gran_total_cierre} ---"
+            f"--- EJECUTANDO CONTABILIZACIÓN A CUENTA DE MAYOR POR GRAN TOTAL: $.{gran_total_cierre} ---"
         )
 
         datos_cuenta_mayor = {
@@ -621,6 +625,43 @@ def ejecutar(
     except Exception as e:
         print_log(f"Error al guardar CSV final: {e}")
 
-    stats["transacciones_detalle"] = df.to_dict(orient="records")
+    # ==============================================================================
+    # TRUCO DE COMPATIBILIDAD PARA LA BASE DE DATOS DEL DASHBOARD
+    # ==============================================================================
+    # 1. Renombramos 'asesor' a 'no_boleta' solo en memoria para que la BD lo acepte
+    if "asesor" in df.columns:
+        df.rename(columns={"asesor": "no_boleta"}, inplace=True)
+
+    # 2. Creamos la columna 'cuenta_banco' que la BD exige obligatoriamente
+    if "cuenta_banco" not in df.columns:
+        df["cuenta_banco"] = "N/A"
+
+    # 3. Forzamos el orden y los nombres exactos que espera SQLite
+    columnas_db = [
+        "sociedad",
+        "id_cliente",
+        "fecha_documento",
+        "no_boleta",
+        "cuenta_banco",
+        "monto_total",
+        "clase_pago",
+        "comentario",
+        "nota_credito",
+        "usuario_sap",
+        "fecha",
+        "hora",
+        "resultado_01",
+        "resultado_02",
+    ]
+
+    for i in range(1, 11):
+        columnas_db.append(f"cobro_{i:02d}")
+
+    for col in columnas_db:
+        if col not in df.columns:
+            df[col] = ""
+
+    # 4. Enviamos al Dashboard el diccionario con la estructura perfecta
+    stats["transacciones_detalle"] = df[columnas_db].to_dict(orient="records")
     summary_callback(stats)
     print_log("--- FIN DEL SCRIPT ---")

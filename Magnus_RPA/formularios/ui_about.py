@@ -238,16 +238,14 @@ class Ui_about:
             QCoreApplication.translate("about", "DESARROLLADO POR:", None)
         )
         self.label_26.setText(
-            QCoreApplication.translate(
-                "about", "\U0001faaa Franco Paolo L\U000000f3pez G\U000000e1lvez", None
-            )
+            QCoreApplication.translate("about", "\U0001faaa ALFREDO JIMENEZ", None)
         )
         self.label_18.setText(
             QCoreApplication.translate("about", "CORREO PERSONAL:", None)
         )
         self.label_22.setText(
             QCoreApplication.translate(
-                "about", "\U0001f4e7 francopaolo_lg@outlook.com", None
+                "about", "\U0001f4e7 alfredo.jimenez@crediopciones.com", None
             )
         )
         self.label_23.setText(
@@ -270,7 +268,7 @@ class Ui_about:
         self.label_20.setText(
             QCoreApplication.translate(
                 "about",
-                '<html><head/><body><p><span style=" font-weight:400;">\U0001f4be 0.0.0 versi\U000000f3n beta</span></p></body></html>',
+                '<html><head/><body><p><span style=" font-weight:400;">\U0001f4be 1.0.0 versi\U000000f3n beta</span></p></body></html>',
                 None,
             )
         )
