@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'operaciones.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.2
+## Created by: Qt User Interface Compiler version 6.11.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -628,19 +628,19 @@ class Ui_menu(object):
         self.chk_mod_silencioso.setText(QCoreApplication.translate("menu", u"Modo Silencioso", None))
         self.chk_reg_detallado.setText(QCoreApplication.translate("menu", u"Registro Detallado", None))
         ___qtablewidgetitem = self.tbl_archivo.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("menu", u"Sociedad", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("menu", u"Sociedad", None))
         ___qtablewidgetitem1 = self.tbl_archivo.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("menu", u"Cliente", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("menu", u"Cliente", None))
         ___qtablewidgetitem2 = self.tbl_archivo.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("menu", u"No Doc", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("menu", u"No Doc", None))
         ___qtablewidgetitem3 = self.tbl_archivo.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("menu", u"Clase", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("menu", u"Clase", None))
         ___qtablewidgetitem4 = self.tbl_archivo.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("menu", u"Banco", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("menu", u"Banco", None))
         ___qtablewidgetitem5 = self.tbl_archivo.horizontalHeaderItem(5)
-        ___qtablewidgetitem5.setText(QCoreApplication.translate("menu", u"Fecha", None));
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("menu", u"Fecha", None))
         ___qtablewidgetitem6 = self.tbl_archivo.horizontalHeaderItem(6)
-        ___qtablewidgetitem6.setText(QCoreApplication.translate("menu", u"Resultado", None));
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("menu", u"Resultado", None))
         self.btn_anterior.setText(QCoreApplication.translate("menu", u"\u2b05\ufe0f Anterior", None))
         self.btn_siguiente.setText(QCoreApplication.translate("menu", u"Siguiente \u27a1\ufe0f", None))
         self.lbl_paginacion.setText(QCoreApplication.translate("menu", u"Mostrando 0 - 0 de 0", None))

@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'usuarios.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.10.2
+## Created by: Qt User Interface Compiler version 6.11.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -725,12 +725,12 @@ class Ui_credenciales(object):
         self.lbl_sec_perfiles.setText(QCoreApplication.translate("credenciales", u"PERFILES CONFIGURADOS", None))
         self.lbl_conteo.setText(QCoreApplication.translate("credenciales", u"0", None))
         ___qtablewidgetitem = self.tbl_usuarios.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("credenciales", u"Alias", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("credenciales", u"Alias", None))
         ___qtablewidgetitem1 = self.tbl_usuarios.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("credenciales", u"Usuario SAP", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("credenciales", u"Usuario SAP", None))
         ___qtablewidgetitem2 = self.tbl_usuarios.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("credenciales", u"Entorno", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("credenciales", u"Entorno", None))
         ___qtablewidgetitem3 = self.tbl_usuarios.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("credenciales", u"Seleccionado", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("credenciales", u"Seleccionado", None))
     # retranslateUi
 

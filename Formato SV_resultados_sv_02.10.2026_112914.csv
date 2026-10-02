@@ -1,0 +1,3 @@
+﻿sociedad;id_cliente;fecha_documento;monto_total;clase_pago;comentario;asesor;nota_credito;usuario_sap;fecha;hora;resultado_01;resultado_02;cobro_01;cobro_02;cobro_03;cobro_04;cobro_05;cobro_06;cobro_07;cobro_08;cobro_09;cobro_10
+SV17;101753467;01.10.2026;266.05;1;COBRO PAGARE;PX 22.09.2026;2151;AVJIMENEZ;02.10.2026;11:29:56;1: Exito Pago 1 (13.72) | 2: Grid Vacio;Exito Cuenta Mayor: Se ha creado documento de contabilización 1300013643 para documento de caja 2467579;;;;;;;;;;
+SV17;101999932;01.10.2027;90;1;COBRO PAGARE;PX 22.09.2026;2151;AVJIMENEZ;02.10.2026;11:30:14;1: Exito Pago 1 (58.8) | 2: Exito Pago 2 (31.2);Exito Cuenta Mayor: Se ha creado documento de contabilización 1300013643 para documento de caja 2467579;;;;;;;;;;

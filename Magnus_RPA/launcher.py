@@ -1,20 +1,35 @@
-import os
 import sys
+
+import six
+
+_ = six  # Evita que el editor borre 'six'
+
+# Parche para el error de PySide6 + Pandas
+for meta_importer in sys.meta_path:
+    if meta_importer.__class__.__name__ == "_SixMetaPathImporter":
+        meta_importer._path = ""
+
+import pandas as pd
+
+_ = pd  # Evita que el editor borre 'pandas'
+
 import ctypes
-from PySide6.QtWidgets import QApplication, QMessageBox, QMainWindow
+
 from PySide6.QtCore import Qt, QThread, Signal
+from PySide6.QtWidgets import QApplication, QMainWindow, QMessageBox
 
 # --- IDENTIDAD DE PROCESO (ícono en barra de tareas de Windows) ---
 # Debe llamarse ANTES de crear cualquier ventana
 try:
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
-        'crediopciones.magnus.bot.1.0'
+        "crediopciones.magnus.bot.1.0"
     )
 except Exception:
     pass
 
 # --- CONFIGURACIÓN ---
-APP_NAME = "Magnus_Core.exe" 
+APP_NAME = "Magnus_Core.exe"
+
 
 class HiloActualizacion(QThread):
     # Definimos las señales que enviarán datos a la interfaz gráfica
@@ -40,10 +55,11 @@ class HiloActualizacion(QThread):
 class ControladorSplash:
     def __init__(self):
         from formularios.ui_splash import Ui_splash
+
         self.ventana = QMainWindow()
         self.ui = Ui_splash()
         self.ui.setupUi(self.ventana)
-        
+
         # Quitar los bordes de Windows
         self.ventana.setWindowFlag(Qt.FramelessWindowHint)
         self.ventana.setAttribute(Qt.WA_TranslucentBackground)
@@ -77,7 +93,7 @@ class ControladorSplash:
     def set_progreso(self, valor):
         if not hasattr(self.ui, "progress_bar"):
             return
-            
+
         if valor == -1:
             # -1 es nuestra señal para detener el "modo indeterminado" infinito
             self.ui.progress_bar.setRange(0, 100)
@@ -90,28 +106,29 @@ class ControladorSplash:
             self.ventana,
             "Actualización Disponible",
             f"Se encontró la versión {version_remota}.\n\n¿Deseas descargar las mejoras ahora?",
-            QMessageBox.Yes | QMessageBox.No
+            QMessageBox.Yes | QMessageBox.No,
         )
         # Devolver respuesta al hilo que está pausado
-        self.worker.respuesta_usuario = (respuesta == QMessageBox.Yes)
+        self.worker.respuesta_usuario = respuesta == QMessageBox.Yes
         self.worker.esperando_respuesta = False
 
     def mostrar_alerta_info(self, titulo, mensaje):
         QMessageBox.information(self.ventana, titulo, mensaje)
-        
+
     def mostrar_alerta_error(self, titulo, mensaje):
         QMessageBox.critical(self.ventana, titulo, mensaje)
 
     def lanzar_app(self):
         # Lanzar la app principal instanciando directamente su clase nativa en memoria (seguro para EXE)
         import vistas.main as app_principal
-        
+
         # Guardamos referencia en controlador para que el GC no lo elimine
         self.ventana_principal = app_principal.ContenedorPrincipal()
         self.ventana_principal.show()
-        
+
         # Cerrar el splash
         self.ventana.close()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
